@@ -1,5 +1,11 @@
+import Body from "./components/Body";
+
 function App() {
-  return <div className="bg-blue-400">Hy there welcome to movie gpt</div>;
+  return (
+    <div>
+      <Body />
+    </div>
+  );
 }
 
 export default App;
