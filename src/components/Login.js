@@ -1,18 +1,98 @@
 import React, { useRef, useState } from "react";
 import Header from "./Header";
 import { Validation } from "../utils/Validation";
+import { auth } from "../utils/firebase";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addUser } from "../utils/userSlice";
 
 const Login = () => {
   const [isSignIn, setIsSignIn] = useState(true);
   const [displayErrMessage, setDisplayErrMessage] = useState(null);
 
+  const name = useRef(null);
   const email = useRef(null);
   const password = useRef(null);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const checkValidation = () => {
     const errMessage = Validation(email.current.value, password.current.value);
     console.log(errMessage);
     setDisplayErrMessage(errMessage);
+
+    //If error then just return
+    if (errMessage) return;
+
+    //Sign up Sign In logic
+
+    if (!isSignIn) {
+      createUserWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          // Signed up
+          const user = userCredential.user;
+          updateProfile(user, {
+            displayName: name.current.value,
+            photoURL: "https://avatars.githubusercontent.com/u/36244104?v=4",
+          })
+            .then(() => {
+              const { uid, email, displayName, photoURL } = auth.currentUser;
+              dispatch(
+                addUser({
+                  uid: uid,
+                  email: email,
+                  displayName: displayName,
+                  photoURL: photoURL,
+                })
+              );
+              // Profile updated!
+              // ...
+            })
+            .catch((error) => {
+              setDisplayErrMessage(error);
+              // An error occurred
+              // ...
+            });
+          console.log(user);
+          navigate("/browse");
+          // ...
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          console.log(errorCode, errorMessage);
+          setDisplayErrMessage(errorCode + "-" + errorMessage);
+          // ..
+        });
+    } else {
+      signInWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+          console.log(user);
+          navigate("/browse");
+          // ...
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+
+          setDisplayErrMessage(errorCode + "-" + errorMessage);
+          if (errorCode === "auth/invalid-credential") {
+            setDisplayErrMessage("Invalid Crendentials. Please Try Again.");
+          }
+        });
+    }
   };
 
   const toggleSignIn = () => {
@@ -36,6 +116,7 @@ const Login = () => {
         </h1>
         {!isSignIn && (
           <input
+            ref={name}
             type="name"
             placeholder="Enter your Full Name"
             className="p-2 my-4 mx-2 w-full ml-1 bg-gray-700"
@@ -60,7 +141,10 @@ const Login = () => {
         >
           {isSignIn ? "Sign In" : "Sign Up"}
         </button>
-        <p className="p-2 cursor-pointer" onClick={toggleSignIn}>
+        <p
+          className="p-2 cursor-pointer hover:underline"
+          onClick={toggleSignIn}
+        >
           {isSignIn
             ? "New to Netflix? Sign Up Now"
             : "Already Registered!! Sign In Now"}
