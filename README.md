@@ -20,3 +20,8 @@
 - Register for TMDB API & get access token
 - Get Data for diff movies in browse page
 - CleanUp Browse Page by create "useNowPlayingMovies" custom Hook.
+- created movie slice
+- update store with movies data
+- fetched data for trailer video
+- update store with trailer video
+- embedded youtube video with autoplay and muted

@@ -19,7 +19,7 @@ const Login = () => {
 
   const checkValidation = () => {
     const errMessage = Validation(email.current.value, password.current.value);
-    console.log(errMessage);
+
     setDisplayErrMessage(errMessage);
 
     //If error then just return
@@ -58,13 +58,12 @@ const Login = () => {
               // An error occurred
               // ...
             });
-          console.log(user);
+
           // ...
         })
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
-          console.log(errorCode, errorMessage);
           setDisplayErrMessage(errorCode + "-" + errorMessage);
           // ..
         });
@@ -77,7 +76,7 @@ const Login = () => {
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
-          console.log(user);
+
           // ...
         })
         .catch((error) => {
