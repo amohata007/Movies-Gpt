@@ -14,3 +14,4 @@
 - Implement signup user api
 - created our redux store with user slice
 - update Profile
+- can't directly navigate to browse and vice versa
