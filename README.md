@@ -15,3 +15,8 @@
 - created our redux store with user slice
 - update Profile
 - can't directly navigate to browse and vice versa
+- unsubscribe onAuthChnage
+- Add hard coded value in Constant file
+- Register for TMDB API & get access token
+- Get Data for diff movies in browse page
+- CleanUp Browse Page by create "useNowPlayingMovies" custom Hook.
