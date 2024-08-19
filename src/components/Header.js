@@ -11,6 +11,7 @@ const Header = () => {
   const navigate = useNavigate();
   const user = useSelector((store) => store.user);
   const dispatch = useDispatch();
+  const showGptSearch = useSelector((store) => store.gpt.showGptSearch);
 
   const HandleGptSearchClick = () => {
     dispatch(toggleGptSearch());
@@ -56,7 +57,7 @@ const Header = () => {
             className="py-2 px-4 m-2 rounded-lg text-white bg-red-500"
             onClick={HandleGptSearchClick}
           >
-            GPT Search
+            {showGptSearch === false ? "GPT Search" : "HomePage"}
           </button>
           <img
             className="w-14 h-14 rounded-lg"

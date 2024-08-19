@@ -32,3 +32,7 @@
 - GPT search Feature
 - GPT search Bar
 - GPT SLice for Store
+- Fetched Searched API from tmdb
+- Fetched searched value from search box
+- Displayed results by reusing moviescard
+- On hover zoom card
