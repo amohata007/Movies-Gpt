@@ -29,3 +29,6 @@
 - Build Movie Card and Movie List
 - Fetched various API's like trending,popular from tmdb
 - Used Tailwind from making Beautiful UI
+- GPT search Feature
+- GPT search Bar
+- GPT SLice for Store

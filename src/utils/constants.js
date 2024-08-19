@@ -20,3 +20,6 @@ export const API_OPTIONS = {
 };
 
 export const IMAGE_CDN_URL = "https://image.tmdb.org/t/p/w780";
+
+export const GPT_SEARCH_IMAGE =
+  "https://wallpapers.com/images/hd/netflix-background-gs7hjuwvv2g0e9fj.jpg";
