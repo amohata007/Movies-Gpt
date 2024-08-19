@@ -36,3 +36,6 @@
 - Fetched searched value from search box
 - Displayed results by reusing moviescard
 - On hover zoom card
+- handled empty poster
+- use of env
+- Memoization for nowPlayingMovies
