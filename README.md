@@ -25,3 +25,7 @@
 - fetched data for trailer video
 - update store with trailer video
 - embedded youtube video with autoplay and muted
+- Build Secondary Container
+- Build Movie Card and Movie List
+- Fetched various API's like trending,popular from tmdb
+- Used Tailwind from making Beautiful UI
