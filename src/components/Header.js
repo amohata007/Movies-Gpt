@@ -49,10 +49,14 @@ const Header = () => {
     return () => unsubscribe();
   }, []);
   return (
-    <div className="absolute w-full bg-gradient-to-b from-black z-10 flex justify-between">
-      <img className="w-48" src={HEADER_LOGO} alt="Movie_Logo"></img>
+    <div className="absolute w-full bg-gradient-to-b from-black z-10 flex flex-col md:flex-row justify-between">
+      <img
+        className="w-48 mx-auto md:mx-0"
+        src={HEADER_LOGO}
+        alt="Movie_Logo"
+      ></img>
       {user && (
-        <div className="flex p-2 m-2 space-x-2">
+        <div className="flex justify-between p-2 m-2 space-x-2">
           <button
             className="py-2 px-4 m-2 rounded-lg text-white bg-red-500"
             onClick={HandleGptSearchClick}
@@ -60,7 +64,7 @@ const Header = () => {
             {showGptSearch === false ? "GPT Search" : "HomePage"}
           </button>
           <img
-            className="w-14 h-14 rounded-lg"
+            className="hidden md:inline-block w-14 h-14 rounded-lg"
             src={user.photoURL ? user.photoURL : SIGN_OUT_LOGO}
             alt="SignOut"
           ></img>
